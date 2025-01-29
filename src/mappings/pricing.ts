@@ -4,10 +4,10 @@ import { Bundle, Pair, Token } from '../../generated/schema'
 import { ADDRESS_ZERO, ONE_BD, ZERO_BD, factoryContract } from './helpers'
 
 // TODO: add proper pairs.
-const WETH_ADDRESS = ''
-const USDC_WETH_PAIR = ''
-const DAI_WETH_PAIR = ''
-const USDT_WETH_PAIR = ''
+const WETH_ADDRESS = '0x760afe86e5de5fa0ee542fc7b7b713e1c5425701'
+const USDC_WETH_PAIR = '0x66367136ba1b3917f86aab7953839102a2428b2b'
+const DAI_WETH_PAIR = '0x750152d4631cd5f06c1fd7c0bc935aa92b7adc2b'
+const USDT_WETH_PAIR = '0xec1d5bbc9498115408a78a3f65a9188326b235af'
 
 export function getEthPriceInUSD(): BigDecimal {
   // fetch eth prices for each stablecoin
@@ -43,12 +43,11 @@ export function getEthPriceInUSD(): BigDecimal {
 
 // token where amounts should contribute to tracked volume and liquidity
 
-// TODO: add proper tokens
 const WHITELIST: string[] = [
-  '', // WETH
-  '', // DAI
-  '', // USDC
-  '' // USDT
+  '0x760afe86e5de5fa0ee542fc7b7b713e1c5425701', // WMONAD
+  '0x2f1014530ed895245ecb5f9a79de023102f2e741', // DAI
+  '0xff901f49b8864ad60cc5799cc9172ae0455ec1d3', // USDC
+  '0x1ed9ca7e442a91591acecfb2d40e843e4fee00ff' // USDT
 ]
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps

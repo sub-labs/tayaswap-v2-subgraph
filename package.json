@@ -7,6 +7,7 @@
     "clean": "graph clean",
     "codegen": "graph codegen",
     "format": "biome format --max-diagnostics 100 --write .",
+    "deploy:testnet": "bunx graph deploy tayaswap-v2-testnet",
     "lint": "biome lint --max-diagnostics 100 --write ."
   },
   "devDependencies": {
