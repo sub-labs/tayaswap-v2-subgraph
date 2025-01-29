@@ -1,0 +1,4 @@
+build/
+node_modules/
+generated/
+.DS_STORE

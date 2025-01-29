@@ -1,0 +1,19 @@
+{
+  "name": "tayaswap-v2-subgraph",
+  "version": "1.0.0",
+  "repository": "https://github.com/sub-labs/tayaswap-v2-subgraph",
+  "scripts": {
+    "build": "graph build",
+    "clean": "graph clean",
+    "codegen": "graph codegen",
+    "format": "biome format --max-diagnostics 100 --write .",
+    "lint": "biome lint --max-diagnostics 100 --write ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@graphprotocol/graph-cli": "0.95.0",
+    "@graphprotocol/graph-ts": "0.37.0",
+    "@types/bun": "latest",
+    "typescript": "5.7.3"
+  }
+}
