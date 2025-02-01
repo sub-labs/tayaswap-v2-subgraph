@@ -7,7 +7,9 @@
     "clean": "graph clean",
     "codegen": "graph codegen",
     "format": "biome format --max-diagnostics 100 --write .",
-    "deploy:testnet": "bunx graph deploy tayaswap-v2-testnet",
+    "create": "graph create --node https://graph-monad.kindynos.mx/deploy tayaswap-v2-subgraph",
+    "deploy": "graph deploy tayaswap-v2-subgraph --ipfs https://ipfs.network.thegraph.com --node https://graph-monad.kindynos.mx/deploy",
+    "deploy:create": "bunx graph deploy tayaswap-v2-testnet",
     "lint": "biome lint --max-diagnostics 100 --write ."
   },
   "devDependencies": {
