@@ -32,7 +32,7 @@ export function bigDecimalExp18(): BigDecimal {
 }
 
 export function convertEthToDecimal(eth: BigInt): BigDecimal {
-  return eth.toBigDecimal().div(exponentToBigDecimal(new BigInt(18)))
+  return eth.toBigDecimal().div(exponentToBigDecimal(18))
 }
 
 export function convertTokenToDecimal(tokenAmount: BigInt, exchangeDecimals: BigInt): BigDecimal {
@@ -43,8 +43,8 @@ export function convertTokenToDecimal(tokenAmount: BigInt, exchangeDecimals: Big
 }
 
 export function equalToZero(value: BigDecimal): boolean {
-  const formattedVal = parseFloat(value.toString())
-  const zero = parseFloat(ZERO_BD.toString())
+  const formattedVal = Number.parseFloat(value.toString())
+  const zero = Number.parseFloat(ZERO_BD.toString())
   if (zero == formattedVal) {
     return true
   }
