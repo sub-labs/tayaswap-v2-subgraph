@@ -7,14 +7,14 @@
     "clean": "graph clean",
     "codegen": "graph codegen",
     "format": "biome format --max-diagnostics 100 --write .",
-    "create": "graph create --node https://graph-monad.kindynos.mx/deploy tayaswap-v2-subgraph",
-    "deploy": "graph deploy tayaswap-v2-subgraph --ipfs https://ipfs.network.thegraph.com --node https://graph-monad.kindynos.mx/deploy",
+    "create": "graph create --node http://161.97.75.20:8020/deploy tayaswap-v2-subgraph",
+    "deploy": "graph deploy tayaswap-v2-subgraph --ipfs https://ipfs.network.thegraph.com --node http://161.97.75.20:8020/deploy",
     "deploy:create": "bunx graph deploy tayaswap-v2-testnet",
     "lint": "biome lint --max-diagnostics 100 --write ."
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@graphprotocol/graph-cli": "0.95.0",
+    "@graphprotocol/graph-cli": "0.96.0",
     "@graphprotocol/graph-ts": "0.37.0",
     "@types/bun": "latest",
     "typescript": "5.7.3"

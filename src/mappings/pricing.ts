@@ -5,33 +5,19 @@ import { ADDRESS_ZERO, ONE_BD, ZERO_BD, factoryContract } from './helpers'
 
 // TODO: add proper pairs.
 const WETH_ADDRESS = '0x760afe86e5de5fa0ee542fc7b7b713e1c5425701'
-const USDC_WETH_PAIR = '0x66367136ba1b3917f86aab7953839102a2428b2b'
-const DAI_WETH_PAIR = '0x750152d4631cd5f06c1fd7c0bc935aa92b7adc2b'
-const USDT_WETH_PAIR = '0xec1d5bbc9498115408a78a3f65a9188326b235af'
+const USDC_WETH_PAIR = '0x10ab4430394c9bdbdcac6b4b7b33a707ce2cee2b'
+const USDT_WETH_PAIR = '0x0b411670f224951c5b57da742976adf189719e2a'
 
 export function getEthPriceInUSD(): BigDecimal {
   // fetch eth prices for each stablecoin
-  const daiPair = Pair.load(DAI_WETH_PAIR) // dai is token0
   const usdcPair = Pair.load(USDC_WETH_PAIR) // usdc is token0
   const usdtPair = Pair.load(USDT_WETH_PAIR) // usdt is token1
 
-  // all 3 have been created
-  if (daiPair !== null && usdcPair !== null && usdtPair !== null) {
-    const totalLiquidityETH = daiPair.reserve1.plus(usdcPair.reserve1).plus(usdtPair.reserve0)
-    const daiWeight = daiPair.reserve1.div(totalLiquidityETH)
+  if (usdtPair !== null && usdcPair !== null) {
+    const totalLiquidityETH = usdtPair.reserve1.plus(usdcPair.reserve1)
+    const daiWeight = usdtPair.reserve1.div(totalLiquidityETH)
     const usdcWeight = usdcPair.reserve1.div(totalLiquidityETH)
-    const usdtWeight = usdtPair.reserve0.div(totalLiquidityETH)
-    return daiPair.token0Price
-      .times(daiWeight)
-      .plus(usdcPair.token0Price.times(usdcWeight))
-      .plus(usdtPair.token1Price.times(usdtWeight))
-  }
-
-  if (daiPair !== null && usdcPair !== null) {
-    const totalLiquidityETH = daiPair.reserve1.plus(usdcPair.reserve1)
-    const daiWeight = daiPair.reserve1.div(totalLiquidityETH)
-    const usdcWeight = usdcPair.reserve1.div(totalLiquidityETH)
-    return daiPair.token0Price.times(daiWeight).plus(usdcPair.token0Price.times(usdcWeight))
+    return usdtPair.token0Price.times(daiWeight).plus(usdcPair.token0Price.times(usdcWeight))
   }
 
   if (usdcPair !== null) {
@@ -45,13 +31,12 @@ export function getEthPriceInUSD(): BigDecimal {
 
 const WHITELIST: string[] = [
   '0x760afe86e5de5fa0ee542fc7b7b713e1c5425701', // WMONAD
-  '0x2f1014530ed895245ecb5f9a79de023102f2e741', // DAI
-  '0xff901f49b8864ad60cc5799cc9172ae0455ec1d3', // USDC
-  '0x1ed9ca7e442a91591acecfb2d40e843e4fee00ff' // USDT
+  '0x7d5d0ba109a6b9f6dde7d2a89a8150b589d49504', // USDC
+  '0xca3feccd9139b990ebbf3873773333f8f25f85cd' // USDT
 ]
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
-const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('400000')
+const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('50000')
 
 // minimum liquidity for price to get tracked
 const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('2')
