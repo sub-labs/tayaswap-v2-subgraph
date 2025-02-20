@@ -46,7 +46,7 @@ const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('2')
  * @todo update to be derived ETH (add stablecoin estimates)
  **/
 export function findEthPerToken(token: Token): BigDecimal {
-  if (token.id === WETH_ADDRESS) {
+  if (token.id == WETH_ADDRESS) {
     return ONE_BD
   }
 
@@ -58,14 +58,14 @@ export function findEthPerToken(token: Token): BigDecimal {
       if (pair === null) {
         continue
       }
-      if (pair.token0 === token.id && pair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)) {
+      if (pair.token0 == token.id && pair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)) {
         const token1 = Token.load(pair.token1)
         if (token1 === null) {
           continue
         }
         return pair.token1Price.times(token1.derivedETH as BigDecimal) // return token1 per our token * Eth per token 1
       }
-      if (pair.token1 === token.id && pair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)) {
+      if (pair.token1 == token.id && pair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)) {
         const token0 = Token.load(pair.token0)
         if (token0 === null) {
           continue
