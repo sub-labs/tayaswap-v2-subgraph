@@ -36,23 +36,23 @@ export function convertEthToDecimal(eth: BigInt): BigDecimal {
 }
 
 export function convertTokenToDecimal(tokenAmount: BigInt, exchangeDecimals: BigInt): BigDecimal {
-  if (exchangeDecimals === ZERO_BI) {
+  if (exchangeDecimals == ZERO_BI) {
     return tokenAmount.toBigDecimal()
   }
   return tokenAmount.toBigDecimal().div(exponentToBigDecimal(exchangeDecimals))
 }
 
 export function equalToZero(value: BigDecimal): boolean {
-  const formattedVal = Number.parseFloat(value.toString())
-  const zero = Number.parseFloat(ZERO_BD.toString())
-  if (zero === formattedVal) {
+  const formattedVal = parseFloat(value.toString())
+  const zero = parseFloat(ZERO_BD.toString())
+  if (zero == formattedVal) {
     return true
   }
   return false
 }
 
 export function isNullEthValue(value: string): boolean {
-  return value === '0x0000000000000000000000000000000000000000000000000000000000000001'
+  return value == '0x0000000000000000000000000000000000000000000000000000000000000001'
 }
 
 export function fetchTokenSymbol(tokenAddress: Address): string {

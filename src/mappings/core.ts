@@ -21,7 +21,7 @@ function isCompleteMint(mintId: string): boolean {
 
 export function handleTransfer(event: Transfer): void {
   // ignore initial transfers for first adds
-  if (event.params.to.toHexString() === ADDRESS_ZERO && event.params.value.equals(BigInt.fromI32(1000))) {
+  if (event.params.to.toHexString() == ADDRESS_ZERO && event.params.value.equals(BigInt.fromI32(1000))) {
     return
   }
 
@@ -55,7 +55,7 @@ export function handleTransfer(event: Transfer): void {
   const mints = transaction.mints
   // part of the erc-20 standard (which is also the pool), whenever you mint new tokens, the from address is 0x0..0
   // the pool is also the erc-20 that gets minted and transferred around
-  if (from.toHexString() === ADDRESS_ZERO) {
+  if (from.toHexString() == ADDRESS_ZERO) {
     // update total supply
     pair.totalSupply = pair.totalSupply.plus(value)
     pair.save()
@@ -88,7 +88,7 @@ export function handleTransfer(event: Transfer): void {
   // for every burn event, there is a transfer first from the LP to the pool (erc-20)
   // when you LP, you get an ERC-20 token which is the accounting token of the LP position
   // the thing that's actually getting transfered is the LP account token
-  if (event.params.to.toHexString() === pair.id) {
+  if (event.params.to.toHexString() == pair.id) {
     const burns = transaction.burns
     const burn = new BurnEvent(
       event.transaction.hash.toHexString().concat('-').concat(BigInt.fromI32(burns.length).toString())
@@ -113,7 +113,7 @@ export function handleTransfer(event: Transfer): void {
   // burn
   // there's two transfers for the LP token,
   // first its going to move from the LP back to the pool, and then it will go from the pool to the zero address
-  if (event.params.to.toHexString() === ADDRESS_ZERO && event.params.from.toHexString() === pair.id) {
+  if (event.params.to.toHexString() == ADDRESS_ZERO && event.params.from.toHexString() == pair.id) {
     pair.totalSupply = pair.totalSupply.minus(value)
     pair.save()
 
