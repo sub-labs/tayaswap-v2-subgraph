@@ -5,23 +5,25 @@ import { ADDRESS_ZERO, ONE_BD, ZERO_BD, factoryContract } from './helpers'
 
 // TODO: add proper pairs.
 const WETH_ADDRESS = '0x760afe86e5de5fa0ee542fc7b7b713e1c5425701'
-const USDC_WETH_PAIR = '0x10ab4430394c9bdbdcac6b4b7b33a707ce2cee2b'
-const USDT_WETH_PAIR = '0x0b411670f224951c5b57da742976adf189719e2a'
+const USDC_WETH_PAIR = '0xb1676d2852c9dbf77e6fc5f92243fdc15426716a'
+const USDT_WETH_PAIR = '0x4bc9e818db40132bc51da52962d439b8ee5abac5'
 
 export function getEthPriceInUSD(): BigDecimal {
   // fetch eth prices for each stablecoin
-  const usdcPair = Pair.load(USDC_WETH_PAIR) // usdc is token0
+  const usdcPair = Pair.load(USDC_WETH_PAIR) // usdc is token1
   const usdtPair = Pair.load(USDT_WETH_PAIR) // usdt is token1
 
   if (usdtPair !== null && usdcPair !== null) {
-    const totalLiquidityETH = usdtPair.reserve1.plus(usdcPair.reserve1)
-    const daiWeight = usdtPair.reserve1.div(totalLiquidityETH)
-    const usdcWeight = usdcPair.reserve1.div(totalLiquidityETH)
-    return usdtPair.token0Price.times(daiWeight).plus(usdcPair.token0Price.times(usdcWeight))
+    const totalLiquidityETH = usdtPair.reserve0.plus(usdcPair.reserve0)
+
+    const usdtWeight = usdtPair.reserve0.div(totalLiquidityETH)
+    const usdcWeight = usdcPair.reserve0.div(totalLiquidityETH)
+
+    return usdtPair.token1Price.times(usdtWeight).plus(usdcPair.token1Price.times(usdcWeight))
   }
 
   if (usdcPair !== null) {
-    return usdcPair.token0Price
+    return usdcPair.token1Price
   }
 
   return ZERO_BD
@@ -30,13 +32,13 @@ export function getEthPriceInUSD(): BigDecimal {
 // token where amounts should contribute to tracked volume and liquidity
 
 const WHITELIST: string[] = [
-  '0x760afe86e5de5fa0ee542fc7b7b713e1c5425701', // WMONAD
-  '0x7d5d0ba109a6b9f6dde7d2a89a8150b589d49504', // USDC
-  '0xca3feccd9139b990ebbf3873773333f8f25f85cd' // USDT
+  '0x760afe86e5de5fa0ee542fc7b7b713e1c5425701', // WMON
+  '0xf817257fed379853cde0fa4f97ab987181b1e5ea', // USDC
+  '0x88b8e2161dedc77ef4ab7585569d2415a1c1055d' // USDT
 ]
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
-const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('50000')
+const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('10000')
 
 // minimum liquidity for price to get tracked
 const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('2')

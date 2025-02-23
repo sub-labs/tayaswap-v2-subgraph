@@ -1,31 +1,31 @@
 import { BigDecimal, BigInt, ethereum } from '@graphprotocol/graph-ts'
 
-import { PairHourData } from '../../generated/schema'
-import { Bundle, Pair, PairDayData, Token, TokenDayData, UniswapDayData, UniswapFactory } from '../../generated/schema'
+import { Factory, PairHourData } from '../../generated/schema'
+import { Bundle, DexDayData, Pair, PairDayData, Token, TokenDayData } from '../../generated/schema'
 import { FACTORY_ADDRESS, ONE_BI, ZERO_BD, ZERO_BI } from './helpers'
 
-export function updateUniswapDayData(event: ethereum.Event): UniswapDayData {
-  const uniswap = UniswapFactory.load(FACTORY_ADDRESS)!
+export function updateDexDayData(event: ethereum.Event): DexDayData {
+  const uniswap = Factory.load(FACTORY_ADDRESS)!
   const timestamp = event.block.timestamp.toI32()
   const dayID = timestamp / 86400
   const dayStartTimestamp = dayID * 86400
-  let uniswapDayData = UniswapDayData.load(dayID.toString())
-  if (uniswapDayData === null) {
-    uniswapDayData = new UniswapDayData(dayID.toString())
-    uniswapDayData.date = dayStartTimestamp
-    uniswapDayData.dailyVolumeUSD = ZERO_BD
-    uniswapDayData.dailyVolumeETH = ZERO_BD
-    uniswapDayData.totalVolumeUSD = ZERO_BD
-    uniswapDayData.totalVolumeETH = ZERO_BD
-    uniswapDayData.dailyVolumeUntracked = ZERO_BD
+  let dexDayData = DexDayData.load(dayID.toString())
+  if (dexDayData === null) {
+    dexDayData = new DexDayData(dayID.toString())
+    dexDayData.date = dayStartTimestamp
+    dexDayData.dailyVolumeUSD = ZERO_BD
+    dexDayData.dailyVolumeETH = ZERO_BD
+    dexDayData.totalVolumeUSD = ZERO_BD
+    dexDayData.totalVolumeETH = ZERO_BD
+    dexDayData.dailyVolumeUntracked = ZERO_BD
   }
 
-  uniswapDayData.totalLiquidityUSD = uniswap.totalLiquidityUSD
-  uniswapDayData.totalLiquidityETH = uniswap.totalLiquidityETH
-  uniswapDayData.txCount = uniswap.txCount
-  uniswapDayData.save()
+  dexDayData.totalLiquidityUSD = uniswap.totalLiquidityUSD
+  dexDayData.totalLiquidityETH = uniswap.totalLiquidityETH
+  dexDayData.txCount = uniswap.txCount
+  dexDayData.save()
 
-  return uniswapDayData as UniswapDayData
+  return dexDayData as DexDayData
 }
 
 export function updatePairDayData(event: ethereum.Event): PairDayData {

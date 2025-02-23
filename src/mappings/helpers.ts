@@ -3,13 +3,12 @@ import { Address, BigDecimal, BigInt } from '@graphprotocol/graph-ts'
 import { ERC20 } from '../../generated/Factory/ERC20'
 import { ERC20NameBytes } from '../../generated/Factory/ERC20NameBytes'
 import { ERC20SymbolBytes } from '../../generated/Factory/ERC20SymbolBytes'
-import { User } from '../../generated/schema'
 import { Factory as FactoryContract } from '../../generated/templates/Pair/Factory'
 
 export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
 
 // TODO: add factory address
-export const FACTORY_ADDRESS = '0xF4A772216E9266d062ceE940B13a709f3542247B'
+export const FACTORY_ADDRESS = '0x83c3f0de6c20835f682bf3c74cc2874c74445ba2'
 
 export const ZERO_BI = BigInt.fromI32(0)
 export const ONE_BI = BigInt.fromI32(1)
@@ -125,13 +124,4 @@ export function fetchTokenDecimals(tokenAddress: Address): BigInt | null {
     }
   }
   return null
-}
-
-export function createUser(address: Address): void {
-  let user = User.load(address.toHexString())
-  if (user === null) {
-    user = new User(address.toHexString())
-    user.usdSwapped = ZERO_BD
-    user.save()
-  }
 }
