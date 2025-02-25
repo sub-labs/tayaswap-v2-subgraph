@@ -8,7 +8,7 @@ import { Factory as FactoryContract } from '../../generated/templates/Pair/Facto
 export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
 
 // TODO: add factory address
-export const FACTORY_ADDRESS = '0x83c3f0de6c20835f682bf3c74cc2874c74445ba2'
+export const FACTORY_ADDRESS = '0xff14c7b3aed5da615ad6a0a560611913a7b34b26'
 
 export const ZERO_BI = BigInt.fromI32(0)
 export const ONE_BI = BigInt.fromI32(1)
