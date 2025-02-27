@@ -5,8 +5,8 @@ import { ADDRESS_ZERO, ONE_BD, ZERO_BD, factoryContract } from './helpers'
 
 // TODO: add proper pairs.
 const WETH_ADDRESS = '0x760afe86e5de5fa0ee542fc7b7b713e1c5425701'
-const USDC_WETH_PAIR = '0x10b1b7022199c06ba2a511e65b39ab580df2a950'
-const USDT_WETH_PAIR = '0x1348ce7caedce309cfbe3caded3a6c070e9b2791'
+const USDC_WETH_PAIR = '0x1512cb2431b9b14ed14e39dad75496b922481cfd'
+const USDT_WETH_PAIR = '0x488e1d7f4ac40ff42817efbdb5db36508277dc99'
 
 export function getEthPriceInUSD(): BigDecimal {
   // fetch eth prices for each stablecoin
