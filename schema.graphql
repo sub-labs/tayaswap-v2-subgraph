@@ -1,4 +1,4 @@
-type Factory @entity {
+type Factory @entity(immutable: true) {
   id: ID!
   pairCount: Int!
   totalVolumeUSD: BigDecimal!
@@ -9,7 +9,7 @@ type Factory @entity {
   txCount: BigInt!
 }
 
-type Token @entity {
+type Token @entity(immutable: true) {
   id: ID!
   symbol: String!
   name: String!
@@ -28,7 +28,7 @@ type Token @entity {
   pairQuote: [Pair!]! @derivedFrom(field: "token1")
 }
 
-type Pair @entity {
+type Pair @entity(immutable: true) {
   id: ID!
   token0: Token!
   token1: Token!
@@ -54,7 +54,7 @@ type Pair @entity {
   swaps: [Swap!]! @derivedFrom(field: "pair")
 }
 
-type Transaction @entity {
+type Transaction @entity(immutable: true) {
   id: ID!
   blockNumber: BigInt!
   timestamp: BigInt!
@@ -63,7 +63,7 @@ type Transaction @entity {
   swaps: [Swap!]!
 }
 
-type Mint @entity {
+type Mint @entity(immutable: true) {
   id: ID!
   transaction: Transaction!
   timestamp: BigInt!
@@ -79,7 +79,7 @@ type Mint @entity {
   feeLiquidity: BigDecimal
 }
 
-type Burn @entity {
+type Burn @entity(immutable: true) {
   id: ID!
   transaction: Transaction!
   timestamp: BigInt!
@@ -96,7 +96,7 @@ type Burn @entity {
   feeLiquidity: BigDecimal
 }
 
-type Swap @entity {
+type Swap @entity(immutable: true) {
   id: ID!
   transaction: Transaction!
   timestamp: BigInt!
@@ -112,12 +112,12 @@ type Swap @entity {
   amountUSD: BigDecimal!
 }
 
-type Bundle @entity {
+type Bundle @entity(immutable: true) {
   id: ID!
   ethPrice: BigDecimal!
 }
 
-type DexDayData @entity {
+type DexDayData @entity(immutable: true) {
   id: ID!
   date: Int!
   dailyVolumeETH: BigDecimal!
@@ -130,7 +130,7 @@ type DexDayData @entity {
   txCount: BigInt!
 }
 
-type PairHourData @entity {
+type PairHourData @entity(immutable: true) {
   id: ID!
   hourStartUnix: Int!
   pair: Pair!
@@ -144,7 +144,7 @@ type PairHourData @entity {
   hourlyTxns: BigInt!
 }
 
-type PairDayData @entity {
+type PairDayData @entity(immutable: true) {
   id: ID!
   date: Int!
   pairAddress: Bytes!
@@ -160,7 +160,7 @@ type PairDayData @entity {
   dailyTxns: BigInt!
 }
 
-type TokenDayData @entity {
+type TokenDayData @entity(immutable: true) {
   id: ID!
   date: Int!
   token: Token!

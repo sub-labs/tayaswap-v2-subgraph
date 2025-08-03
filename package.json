@@ -9,14 +9,14 @@
     "format": "biome format --max-diagnostics 100 --write .",
     "create": "graph create --node https://graph-monad.kindynos.mx/deploy tayaswap-v2-subgraph",
     "deploy": "graph deploy tayaswap-v2-subgraph --ipfs https://ipfs.network.thegraph.com --node https://graph-monad.kindynos.mx/deploy",
-    "deploy:create": "bunx graph deploy tayaswap-v2-testnet",
+    "deploy:create": "bunx graph deploy tayaswap-v-2-testnet",
     "lint": "biome lint --max-diagnostics 100 --write ."
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@graphprotocol/graph-cli": "0.96.0",
-    "@graphprotocol/graph-ts": "0.37.0",
-    "@types/bun": "latest",
-    "typescript": "5.7.3"
+    "@biomejs/biome": "2.1.3",
+    "@graphprotocol/graph-cli": "0.97.1",
+    "@graphprotocol/graph-ts": "0.38.1",
+    "@types/bun": "^1.2.19",
+    "typescript": "5.9.2"
   }
 }
